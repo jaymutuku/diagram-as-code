@@ -95,7 +95,7 @@ environment variable.
 
 1. For the [example](./example.md) view the output [here](./example.html)
 
-2. You can also convert from `MD` to `PDF`
+2. You can also convert from `MD` to `PDF` as shown [here](./example.pdf)
 ```bash
-$ pandoc -f markdown -t pdf --pdf-engine=luatex example.md -o example.pdf --filter pandoc-plantuml
+$ pandoc example.md -o example.pdf --filter pandoc-plantuml
 ```
