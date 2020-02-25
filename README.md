@@ -4,16 +4,18 @@
 
 https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml
 
-#### Step 2:Configure the extension
+#### Step 2: Configure the extension
 - Open user setting and configure like
-`CTRL + Shift + P`
+1. Press `ctrl + p`
+2. Type `settings`
+
 
 ```json
 "plantuml.server": "http://localhost:8080",
 "plantuml.render": "PlantUMLServer"
 ```
 
-#### Step 3:Pull and run docker image for plantUML Server
+#### Step 3: Pull and run docker image for plantUML Server
 
 - *pull plantUML server docker image*
 * https://hub.docker.com/r/plantuml/plantuml-server/  
@@ -50,7 +52,7 @@ You may get an error for instance if port `8080` is used by another app e.g jenk
 The PlantUML images are served over `http://` and you should allow your preview to include data from unsafe sources.
 
 
-Press `CTRL + Shift + P`
+Press `ctrl + shift + P`
 
 - *Open markdown preview security settings*
 
@@ -71,3 +73,29 @@ The image is rendered on the fly
 
 
 #### Step 5: Convert Markdown document with embedded PlantUML to HTML file
+
+1. Install pandoc [plantuml filter](https://github.com/timofurrer/pandoc-plantuml-filter)
+
+```bash
+$ pip install pandoc-plantuml-filter
+```
+2. Use it like any other filter
+```bash
+$ pandoc -f markdown -t html example.md -o example.html --filter pandoc-plantuml
+```
+- From running above command you get the following output
+
+```bash
+Created directory plantuml-images
+Created image plantuml-images/402741d387c62ca584eaab62c916046351ed658f.svg
+```
+The PlantUML binary must be in your `$PATH` or can be set with the `PLANTUML_BIN` 
+environment variable.
+- Otherwise the plantuml docker container should be running.
+
+1. For the [example](./example.md) view the output [here](./example.html)
+
+2. You can also convert from `MD` to `PDF`
+```bash
+$ pandoc -f markdown -t pdf --pdf-engine=luatex example.md -o example.pdf --filter pandoc-plantuml
+```
